@@ -1,0 +1,4 @@
+# Ignore files ending with .bll, .html, and .tex in all directories
+*.bbl
+*.html
+*.tex
