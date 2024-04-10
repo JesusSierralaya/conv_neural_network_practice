@@ -1,5 +1,7 @@
 #+title: CNN Org Mode
 #+author: Jesus Sierralaya
+#+LaTeX_HEADER: \usepackage{minted}
+#+LaTeX_HEADER: \setminted{frame=single, framesep=2mm}
 
 * Load libraries
 #+begin_src python :session :results output
@@ -101,9 +103,11 @@ _________________________________________________________________
 batch_size = 128
 epochs = 1
 
-model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
+model.compile(loss="categorical_crossentropy",
+              optimizer="adam", metrics=["accuracy"])
 
-model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=0.1, verbose = False)
+model.fit(x_train, y_train, batch_size=batch_size,
+          epochs=epochs, validation_split=0.1, verbose = False)
 #+end_src
 
 #+RESULTS:
