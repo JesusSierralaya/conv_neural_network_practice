@@ -1,0 +1,129 @@
+#+title: RNC Org
+
+* Load libraries
+#+begin_src python :session :results output
+import os; os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+import matplotlib.pyplot as plt
+import numpy as np
+import keras
+from keras import layers
+import tensorflow as tf
+import argparse
+from sklearn.preprocessing import LabelBinarizer
+from keras.datasets import mnist
+#+end_src
+
+#+RESULTS:
+
+* Set parameters
+#+begin_src python :session :results output
+num_classes = 10
+input_shape = (28, 28, 1)
+#+end_src
+
+#+RESULTS:
+
+* Pre-process
+#+begin_src python :session :results output
+(x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
+
+x_train = x_train.astype("float32") / 255
+x_test = x_test.astype("float32") / 255
+
+x_train = np.expand_dims(x_train, -1)
+x_test = np.expand_dims(x_test, -1)
+print("x_train shape:", x_train.shape)
+print(x_train.shape[0], "train samples")
+print(x_test.shape[0], "test samples")
+
+label_binarizer = LabelBinarizer()
+y_train = label_binarizer.fit_transform(y_train)
+y_test = label_binarizer.fit_transform(y_test)
+#+end_src
+
+#+RESULTS:
+: x_train shape: (60000, 28, 28, 1)
+: 60000 train samples
+: 10000 test samples
+
+* Create the model
+#+begin_src python :session :results output
+model = keras.Sequential(
+    [
+        keras.Input(shape=input_shape),
+        layers.Conv2D(32, kernel_size=(3, 3), activation="relu"),
+        layers.MaxPooling2D(pool_size=(2, 2)),
+        layers.Conv2D(64, kernel_size=(3, 3), activation="relu"),
+        layers.MaxPooling2D(pool_size=(2, 2)),
+        layers.Flatten(),
+        layers.Dropout(0.5),
+        layers.Dense(num_classes, activation="softmax"),
+    ]
+)
+
+model.summary()
+#+end_src
+
+#+RESULTS:
+#+begin_example
+Model: "sequential"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #
+=================================================================
+ conv2d (Conv2D)             (None, 26, 26, 32)        320
+
+ max_pooling2d (MaxPooling2  (None, 13, 13, 32)        0
+ D)
+
+ conv2d_1 (Conv2D)           (None, 11, 11, 64)        18496
+
+ max_pooling2d_1 (MaxPoolin  (None, 5, 5, 64)          0
+ g2D)
+
+ flatten (Flatten)           (None, 1600)              0
+
+ dropout (Dropout)           (None, 1600)              0
+
+ dense (Dense)               (None, 10)                16010
+
+=================================================================
+Total params: 34826 (136.04 KB)
+Trainable params: 34826 (136.04 KB)
+Non-trainable params: 0 (0.00 Byte)
+_________________________________________________________________
+#+end_example
+
+
+* Set the parameters, compile and train the model
+
+#+begin_src python :session :results output
+batch_size = 128
+epochs = 1
+
+model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
+
+model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=0.1, verbose = False)
+#+end_src
+
+#+RESULTS:
+
+* Evaluate the performance of the trained model
+#+begin_src python :session :results output
+test_loss, test_accuracy = model.evaluate(x_test, y_test, verbose=2)
+print(f"Test accuracy: {test_accuracy * 100:.2f}%")
+#+end_src
+
+#+RESULTS:
+: 313/313 - 0s - loss: 0.0883 - accuracy: 0.9734 - 298ms/epoch - 953us/step
+: Test accuracy: 97.34%
+
+#+name: eval-model
+#+begin_src python :session :results value
+test_loss, test_accuracy = model.evaluate(x_test, y_test, verbose=2)
+f"{test_accuracy * 100:.2f}%"
+#+end_src
+
+#+RESULTS: eval-model
+: 97.34%
+
+The test accuracy is call_eval-model() {{{results(=97.34%=)}}}.
