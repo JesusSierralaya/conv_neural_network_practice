@@ -108,18 +108,10 @@ model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_spl
 #+RESULTS:
 
 * Evaluate the performance of the trained model
-#+begin_src python :session :results output
-test_loss, test_accuracy = model.evaluate(x_test, y_test, verbose=2)
-print(f"Test accuracy: {test_accuracy * 100:.2f}%")
-#+end_src
-
-#+RESULTS:
-: 313/313 - 0s - loss: 0.0883 - accuracy: 0.9734 - 298ms/epoch - 953us/step
-: Test accuracy: 97.34%
-
 #+name: eval-model
 #+begin_src python :session :results value
 test_loss, test_accuracy = model.evaluate(x_test, y_test, verbose=2)
+print(f"Test accuracy: {test_accuracy * 100:.2f}%")
 f"{test_accuracy * 100:.2f}%"
 #+end_src
 
