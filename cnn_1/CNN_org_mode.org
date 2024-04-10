@@ -1,4 +1,5 @@
-#+title: RNC Org
+#+title: CNN Org Mode
+#+author: Jesus Sierralaya
 
 * Load libraries
 #+begin_src python :session :results output
