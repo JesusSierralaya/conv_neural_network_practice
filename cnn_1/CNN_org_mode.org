@@ -2,8 +2,10 @@
 #+author: Jesus Sierralaya
 
 #+latex_header: \usepackage{minted}
+#+begin_export latex
 \definecolor{bg}{rgb}{0.95,0.95,0.95}
-#+latex_header: \setminted{bgcolor= bg, linenos=true, breaklines=true}
+\setminted{bgcolor= bg, linenos=true, breaklines=true}
+#+end_export
 
 * Load libraries
 #+begin_src python :session :results output
