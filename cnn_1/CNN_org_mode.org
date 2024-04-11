@@ -1,12 +1,9 @@
 #+title: CNN ORG Mode
 #+author: Jesus Sierralaya
 
-#+LaTeX_HEADER: \usepackage{minted}
-#+begin_src latex
-% For pdf output
+#+latex_header: \usepackage{minted}
 \definecolor{bg}{rgb}{0.95,0.95,0.95}
-\setminted{bgcolor= bg, linenos=true, breaklines=true}
-#+end_src
+#+latex_header: \setminted{bgcolor= bg, linenos=true, breaklines=true}
 
 * Load libraries
 #+begin_src python :session :results output
