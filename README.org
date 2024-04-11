@@ -1,22 +1,20 @@
-#+title: Readme
+#+title: Convolutional Neural Networks Practice Repository
 
-* Convolutional Neural Networks Practice Repository
-
-** Overview
+* Overview
 This repository is dedicated to the practice and improvement of deep learning techniques, specifically focusing on convolutional neural networks (CNNs). It serves as an academic project aimed at exploring, understanding, and enhancing CNN models for various applications.
 
-** Objectives
+* Objectives
 - Exploration: To understand the intricacies of CNN architectures and their applications in deep learning.
 - Implementation: To apply practical knowledge by coding CNNs using Python, Keras, and TensorFlow.
 - Improvement: To enhance existing CNN models by experimenting with different architectures, parameters, and datasets.
 - Sharing: To contribute back to the community by documenting the learnings and improvements made during the practice sessions.
 
-** Tools and Technologies
+* Tools and Technologies
 - Python: The primary programming language used for writing the code.
 - Keras: A high-level neural networks API, running on top of TensorFlow, which makes experimentation and prototyping quicker and easier.
 - TensorFlow: An end-to-end open-source platform for machine learning that provides comprehensive tools and libraries for building and deploying ML models.
 
-** Getting Started
+* Getting Started
 To get started with this project, please follow these steps:
 
 1. Clone the Repository:
@@ -41,10 +39,10 @@ To get started with this project, please follow these steps:
 4. Explore the Notebooks:
    Navigate through the notebooks to explore the different CNN models and experiments. Document your findings and experiments directly in org mode files for a comprehensive learning and development experience.
 
-** Contribution
+* Contribution
 Contributions are welcome! If you have ideas for improvements or want to share your experiments with CNNs, please feel free to fork this repository, make your changes, and submit a pull request.
 
-** License
+* License
 This project is open-sourced under the MIT License. See the LICENSE file for more details.
 
 #+BEGIN_QUOTE
