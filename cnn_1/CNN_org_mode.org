@@ -1,7 +1,12 @@
-#+title: CNN Org Mode
+#+title: CNN ORG Mode
 #+author: Jesus Sierralaya
+
 #+LaTeX_HEADER: \usepackage{minted}
-#+LaTeX_HEADER: \setminted{frame=single, framesep=2mm}
+#+begin_src latex
+% For pdf output
+\definecolor{bg}{rgb}{0.95,0.95,0.95}
+\setminted{bgcolor= bg, linenos=true, breaklines=true}
+#+end_src
 
 * Load libraries
 #+begin_src python :session :results output
@@ -106,8 +111,7 @@ epochs = 1
 model.compile(loss="categorical_crossentropy",
               optimizer="adam", metrics=["accuracy"])
 
-model.fit(x_train, y_train, batch_size=batch_size,
-          epochs=epochs, validation_split=0.1, verbose = False)
+model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=0.1, verbose = False)
 #+end_src
 
 #+RESULTS:
