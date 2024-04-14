@@ -4,10 +4,12 @@
 #+latex_header: \usepackage{minted}
 #+begin_export latex
 \definecolor{bg}{rgb}{0.95,0.95,0.95}
-\setminted{bgcolor= bg, linenos=true, breaklines=true}
+\setminted{bgcolor= bg, linenos=true, breaklines=true, mathescape=true, escapeinside=||, frame=single, framerule=2pt, rulecolor=\color{purple}, highlightcolor=green}
+\usemintedstyle{perldoc}
 #+end_export
 
 * Load libraries
+#+ATTR_LATEX: :options highlightlines={2,5-7}, firstnumber=2, bgcolor=yellow!20, frame=lines, style=friendly, numbersep=50pt, baselinestretch=1.5
 #+begin_src python :session :results output
 import os; os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import matplotlib.pyplot as plt
@@ -24,7 +26,7 @@ from keras.datasets import mnist
 
 * Set parameters
 #+begin_src python :session :results output
-num_classes = 10
+num_classes = |\colorbox{green}{10}|
 input_shape = (28, 28, 1)
 #+end_src
 
@@ -49,9 +51,6 @@ y_test = label_binarizer.fit_transform(y_test)
 #+end_src
 
 #+RESULTS:
-: x_train shape: (60000, 28, 28, 1)
-: 60000 train samples
-: 10000 test samples
 
 * Create the model
 #+begin_src python :session :results output :exports both
@@ -73,25 +72,25 @@ model.summary()
 
 #+RESULTS:
 #+begin_example
-Model: "sequential_30"
+Model: "sequential_3"
 _________________________________________________________________
  Layer (type)                Output Shape              Param #
 =================================================================
- conv2d_60 (Conv2D)          (None, 26, 26, 32)        320
+ conv2d_6 (Conv2D)           (None, 26, 26, 32)        320
 
- max_pooling2d_60 (MaxPooli  (None, 13, 13, 32)        0
- ng2D)
+ max_pooling2d_6 (MaxPoolin  (None, 13, 13, 32)        0
+ g2D)
 
- conv2d_61 (Conv2D)          (None, 11, 11, 64)        18496
+ conv2d_7 (Conv2D)           (None, 11, 11, 64)        18496
 
- max_pooling2d_61 (MaxPooli  (None, 5, 5, 64)          0
- ng2D)
+ max_pooling2d_7 (MaxPoolin  (None, 5, 5, 64)          0
+ g2D)
 
- flatten_30 (Flatten)        (None, 1600)              0
+ flatten_3 (Flatten)         (None, 1600)              0
 
- dropout_30 (Dropout)        (None, 1600)              0
+ dropout_3 (Dropout)         (None, 1600)              0
 
- dense_30 (Dense)            (None, 10)                16010
+ dense_3 (Dense)             (None, 10)                16010
 
 =================================================================
 Total params: 34826 (136.04 KB)
@@ -104,12 +103,12 @@ _________________________________________________________________
 * Set the parameters, compile and train the model
 
 #+begin_src python :session :results output
-batch_size = 128
-epochs = 10
+batch_size = 2# 128
+epochs = 2
 
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
-history = model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=0.1, verbose = False)
+# history = model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=0.1, verbose = False)
 #+end_src
 
 #+RESULTS:
@@ -117,26 +116,26 @@ history = model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, vali
 * Evaluate the performance of the trained model
 #+name: eval-model
 #+begin_src python :session :results value
-test_loss, test_accuracy = model.evaluate(x_test, y_test, verbose=2)
-print(f"Test accuracy: {test_accuracy * 100:.2f}%")
-f"{test_accuracy * 100:.2f}%"
+# test_loss, test_accuracy = model.evaluate(x_test, y_test, verbose=2)
+# print(f"Test accuracy: {test_accuracy * 100:.2f}%")
+# f"{test_accuracy * 100:.2f}%"
 #+end_src
 
 #+RESULTS: eval-model
-: 97.38%
+: 98.87%
 
-The test accuracy is call_eval-model() {{{results(=97.38%=)}}}.
+The test accuracy is call_eval-model() {{{results(=98.87%=)}}}.
 
 * Learning graph
 
 #+begin_src python :session :exports both :results output graphics file :file images/training.png
-plt.figure()
-plt.plot(history.history['accuracy'], label='Training Accuracy')
-plt.plot(history.history['val_accuracy'], label='Validation Accuracy')
-plt.title('Training and Validation Accuracy')
-plt.xlabel('Epoch')
-plt.ylabel('Accuracy')
-plt.legend()
+# plt.figure()
+# plt.plot(history.history['accuracy'], label='Training Accuracy')
+# plt.plot(history.history['val_accuracy'], label='Validation Accuracy')
+# plt.title('Training and Validation Accuracy')
+# plt.xlabel('Epoch')
+# plt.ylabel('Accuracy')
+# plt.legend()
 #+end_src
 
 #+RESULTS:
